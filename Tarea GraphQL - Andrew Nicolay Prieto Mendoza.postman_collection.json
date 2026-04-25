@@ -1,0 +1,313 @@
+{
+  "info": {
+    "_postman_id": "d870987b-8803-47f2-b32f-b5ffc6ff4407",
+    "name": "Tarea GraphQL - Andrew Nicolay Prieto Mendoza",
+    "description": "### Welcome to Postman! This is your first collection. \n\nCollections are your starting point for building and testing APIs. You can use this one to:\n\n• Group related requests\n• Test your API in real-world scenarios\n• Document and share your requests\n\nUpdate the name and overview whenever you’re ready to make it yours.\n\n[Learn more about Postman Collections.](https://learning.postman.com/docs/collections/collections-overview/)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "54276478",
+    "_collection_link": "https://go.postman.co/collection/54276478-d870987b-8803-47f2-b32f-b5ffc6ff4407?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Query - All Countries",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "pm.test(\"Response has countries array\", function () {",
+              "    var jsonData = pm.response.json();",
+              "    pm.expect(jsonData.data).to.have.property(\"countries\");",
+              "    pm.expect(jsonData.data.countries).to.be.an(\"array\");",
+              "});",
+              "pm.test(\"Each country has code and name\", function () {",
+              "    var jsonData = pm.response.json();",
+              "    jsonData.data.countries.forEach(function(country) {",
+              "        pm.expect(country).to.have.property(\"code\");",
+              "        pm.expect(country).to.have.property(\"name\");",
+              "    });",
+              "});",
+              "pm.test(\"No GraphQL errors\", function () {",
+              "    var jsonData = pm.response.json();",
+              "    pm.expect(jsonData).to.not.have.property(\"errors\");",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "graphql",
+          "graphql": {
+            "query": "query GetAllCountries {\n  countries {\n    code\n    name\n    capital\n    currency\n    phone\n  }\n}",
+            "variables": ""
+          }
+        },
+        "url": {
+          "raw": "https://countries.trevorblades.com/graphql",
+          "protocol": "https",
+          "host": [
+            "countries",
+            "trevorblades",
+            "com"
+          ],
+          "path": [
+            "graphql"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Query - All Continents",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "pm.test(\"Response has continents array\", function () {",
+              "    var jsonData = pm.response.json();",
+              "    pm.expect(jsonData.data).to.have.property(\"continents\");",
+              "    pm.expect(jsonData.data.continents).to.be.an(\"array\");",
+              "});",
+              "pm.test(\"Continents array is not empty\", function () {",
+              "    var jsonData = pm.response.json();",
+              "    pm.expect(jsonData.data.continents.length).to.be.greaterThan(0);",
+              "});",
+              "pm.test(\"No GraphQL errors\", function () {",
+              "    var jsonData = pm.response.json();",
+              "    pm.expect(jsonData).to.not.have.property(\"errors\");",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "graphql",
+          "graphql": {
+            "query": "query GetAllContinents {\n  continents {\n    code\n    name\n  }\n}",
+            "variables": ""
+          }
+        },
+        "url": {
+          "raw": "https://countries.trevorblades.com/graphql",
+          "protocol": "https",
+          "host": [
+            "countries",
+            "trevorblades",
+            "com"
+          ],
+          "path": [
+            "graphql"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Query - Continent with Nested Countries (Nested Query)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "pm.test(\"Continent is South America\", function () {",
+              "    var jsonData = pm.response.json();",
+              "    pm.expect(jsonData.data.continent.name).to.eql(\"South America\");",
+              "});",
+              "pm.test(\"Continent has nested countries\", function () {",
+              "    var jsonData = pm.response.json();",
+              "    pm.expect(jsonData.data.continent.countries).to.be.an(\"array\");",
+              "    pm.expect(jsonData.data.continent.countries.length).to.be.greaterThan(0);",
+              "});",
+              "pm.test(\"Countries have nested languages\", function () {",
+              "    var jsonData = pm.response.json();",
+              "    jsonData.data.continent.countries.forEach(function(country) {",
+              "        pm.expect(country).to.have.property(\"languages\");",
+              "    });",
+              "});",
+              "pm.test(\"No GraphQL errors\", function () {",
+              "    var jsonData = pm.response.json();",
+              "    pm.expect(jsonData).to.not.have.property(\"errors\");",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "graphql",
+          "graphql": {
+            "query": "query GetContinentWithCountries {\n  continent(code: \"SA\") {\n    name\n    countries {\n      name\n      capital\n      currency\n      languages {\n        name\n        native\n      }\n    }\n  }\n}",
+            "variables": ""
+          }
+        },
+        "url": {
+          "raw": "https://countries.trevorblades.com/graphql",
+          "protocol": "https",
+          "host": [
+            "countries",
+            "trevorblades",
+            "com"
+          ],
+          "path": [
+            "graphql"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Query - Country by Code (Filter)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "pm.test(\"Country name is Colombia\", function () {",
+              "    var jsonData = pm.response.json();",
+              "    pm.expect(jsonData.data.country.name).to.eql(\"Colombia\");",
+              "});",
+              "pm.test(\"Country has capital\", function () {",
+              "    var jsonData = pm.response.json();",
+              "    pm.expect(jsonData.data.country).to.have.property(\"capital\");",
+              "    pm.expect(jsonData.data.country.capital).to.eql(\"Bogotá\");",
+              "});",
+              "pm.test(\"No GraphQL errors\", function () {",
+              "    var jsonData = pm.response.json();",
+              "    pm.expect(jsonData).to.not.have.property(\"errors\");",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "graphql",
+          "graphql": {
+            "query": "query GetCountryByCode {\n  country(code: \"CO\") {\n    name\n    capital\n    currency\n    phone\n    emoji\n    native\n  }\n}",
+            "variables": ""
+          }
+        },
+        "url": {
+          "raw": "https://countries.trevorblades.com/graphql",
+          "protocol": "https",
+          "host": [
+            "countries",
+            "trevorblades",
+            "com"
+          ],
+          "path": [
+            "graphql"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Query - Countries by Continent Filter",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "pm.test(\"Response has countries array\", function () {",
+              "    var jsonData = pm.response.json();",
+              "    pm.expect(jsonData.data).to.have.property(\"countries\");",
+              "    pm.expect(jsonData.data.countries).to.be.an(\"array\");",
+              "});",
+              "pm.test(\"All countries are in Europe\", function () {",
+              "    var jsonData = pm.response.json();",
+              "    jsonData.data.countries.forEach(function(country) {",
+              "        pm.expect(country.continent.name).to.eql(\"Europe\");",
+              "    });",
+              "});",
+              "pm.test(\"No GraphQL errors\", function () {",
+              "    var jsonData = pm.response.json();",
+              "    pm.expect(jsonData).to.not.have.property(\"errors\");",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "graphql",
+          "graphql": {
+            "query": "query GetCountriesByContinent {\n  countries(filter: { continent: { eq: \"EU\" } }) {\n    name\n    capital\n    currency\n    emoji\n    continent {\n      name\n    }\n  }\n}",
+            "variables": ""
+          }
+        },
+        "url": {
+          "raw": "https://countries.trevorblades.com/graphql",
+          "protocol": "https",
+          "host": [
+            "countries",
+            "trevorblades",
+            "com"
+          ],
+          "path": [
+            "graphql"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
