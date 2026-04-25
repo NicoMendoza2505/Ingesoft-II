@@ -92,7 +92,7 @@ A diferencia de JSONPlaceholder:
 
 ---
 
-## 📷 Evidencias
+## Evidencias
 
 ### 🔹 GET All Characters
 ![GET All Characters](https://github.com/user-attachments/assets/a10b9acf-5365-4d47-9bee-33a7cff89b61)
