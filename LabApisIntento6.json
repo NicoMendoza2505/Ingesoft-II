@@ -1,0 +1,202 @@
+{
+  "info": {
+    "_postman_id": "lab-adaptado-crud",
+    "name": "Lab APIs Adaptado - CRUD + Rick & Morty",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "CRUD (DummyJSON)",
+      "item": [
+        {
+          "name": "GET Usuarios",
+          "request": {
+            "method": "GET",
+            "url": "{{auth_url}}/users"
+          }
+        },
+        {
+          "name": "GET Usuario por ID",
+          "request": {
+            "method": "GET",
+            "url": "{{auth_url}}/users/{{filterUser}}"
+          }
+        },
+        {
+          "name": "POST Crear usuario",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{auth_url}}/users/add",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"Andrew\",\n  \"lastName\": \"Prieto\",\n  \"age\": 20,\n  \"gender\": \"male\",\n  \"email\": \"andrew@test.com\",\n  \"username\": \"andrew123\",\n  \"password\": \"123456\"\n}"
+            }
+          }
+        },
+        {
+          "name": "PUT Actualizar usuario",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{auth_url}}/users/{{filterUser}}",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"UpdatedName\"\n}"
+            }
+          }
+        },
+        {
+          "name": "PATCH Actualizar campo",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{auth_url}}/users/{{filterUser}}",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"age\": 25\n}"
+            }
+          }
+        },
+        {
+          "name": "DELETE Usuario",
+          "request": {
+            "method": "DELETE",
+            "url": "{{auth_url}}/users/{{filterUser}}"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Rick & Morty (GET)",
+      "item": [
+        {
+          "name": "GET All Characters",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url_rickandmorty}}/character"
+          }
+        },
+        {
+          "name": "GET Character by ID",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url_rickandmorty}}/character/1"
+          }
+        },
+        {
+          "name": "GET Filter Characters",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url_rickandmorty}}/character?status=alive"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Auth JWT",
+      "item": [
+        {
+          "name": "POST Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{auth_url}}/auth/login",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"emilys\",\n  \"password\": \"emilyspass\"\n}"
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const body = pm.response.json();",
+                  "pm.collectionVariables.set('token', body.accessToken);",
+                  "pm.collectionVariables.set('refreshToken', body.refreshToken);",
+                  "pm.test('Status 200', () => pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "GET Perfil con token",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}"
+                }
+              ]
+            },
+            "method": "GET",
+            "url": "{{auth_url}}/auth/me"
+          }
+        },
+        {
+          "name": "POST Refresh",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{auth_url}}/auth/refresh",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"refreshToken\": \"{{refreshToken}}\"\n}"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url_rickandmorty",
+      "value": "https://rickandmortyapi.com/api"
+    },
+    {
+      "key": "auth_url",
+      "value": "https://dummyjson.com"
+    },
+    {
+      "key": "filterUser",
+      "value": "1"
+    },
+    {
+      "key": "token",
+      "value": ""
+    },
+    {
+      "key": "refreshToken",
+      "value": ""
+    }
+  ]
+}
