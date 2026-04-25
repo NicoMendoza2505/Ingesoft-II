@@ -1,0 +1,582 @@
+{
+  "info": {
+    "_postman_id": "7b0b8bc8-20ff-49d9-9bb5-42aaa03005dd",
+    "name": "Tarea REST - Rick and Morty - Andrew Nicolay Prieto Mendoza",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "54276478",
+    "_collection_link": "https://go.postman.co/collection/54276478-7b0b8bc8-20ff-49d9-9bb5-42aaa03005dd?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "GET All Characters",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "pm.test(\"Response has results array\", function () {",
+              "    var jsonData = pm.response.json();",
+              "    pm.expect(jsonData).to.have.property(\"results\");",
+              "    pm.expect(jsonData.results).to.be.an(\"array\");",
+              "});",
+              "pm.test(\"Results array is not empty\", function () {",
+              "    var jsonData = pm.response.json();",
+              "    pm.expect(jsonData.results.length).to.be.greaterThan(0);",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url_rickandmorty}}/character",
+          "host": [
+            "{{base_url_rickandmorty}}"
+          ],
+          "path": [
+            "character"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET Character by ID (Rick Sanchez)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "pm.test(\"Character name is Rick Sanchez\", function () {",
+              "    var jsonData = pm.response.json();",
+              "    pm.expect(jsonData.name).to.eql(\"Rick Sanchez\");",
+              "});",
+              "pm.test(\"Character has species property\", function () {",
+              "    var jsonData = pm.response.json();",
+              "    pm.expect(jsonData).to.have.property(\"species\");",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url_rickandmorty}}/character/1",
+          "host": [
+            "{{base_url_rickandmorty}}"
+          ],
+          "path": [
+            "character",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET Characters with Filter (status=alive)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "pm.test(\"All characters are alive\", function () {",
+              "    var jsonData = pm.response.json();",
+              "    jsonData.results.forEach(function(character) {",
+              "        pm.expect(character.status).to.eql(\"Alive\");",
+              "    });",
+              "});",
+              "pm.test(\"Response time is less than 2000ms\", function () {",
+              "    pm.expect(pm.response.responseTime).to.be.below(2000);",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url_rickandmorty}}/character?status=alive&species=Human",
+          "host": [
+            "{{base_url_rickandmorty}}"
+          ],
+          "path": [
+            "character"
+          ],
+          "query": [
+            {
+              "key": "status",
+              "value": "alive"
+            },
+            {
+              "key": "species",
+              "value": "Human"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET All Episodes",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "pm.test(\"Response has info and results\", function () {",
+              "    var jsonData = pm.response.json();",
+              "    pm.expect(jsonData).to.have.property(\"info\");",
+              "    pm.expect(jsonData).to.have.property(\"results\");",
+              "});",
+              "pm.test(\"Each episode has a name and air_date\", function () {",
+              "    var jsonData = pm.response.json();",
+              "    jsonData.results.forEach(function(ep) {",
+              "        pm.expect(ep).to.have.property(\"name\");",
+              "        pm.expect(ep).to.have.property(\"air_date\");",
+              "    });",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url_rickandmorty}}/episode",
+          "host": [
+            "{{base_url_rickandmorty}}"
+          ],
+          "path": [
+            "episode"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET Episode by ID",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "pm.test(\"Episode name is Pilot\", function () {",
+              "    var jsonData = pm.response.json();",
+              "    pm.expect(jsonData.name).to.eql(\"Pilot\");",
+              "});",
+              "pm.test(\"Episode has characters array\", function () {",
+              "    var jsonData = pm.response.json();",
+              "    pm.expect(jsonData).to.have.property(\"characters\");",
+              "    pm.expect(jsonData.characters).to.be.an(\"array\");",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url_rickandmorty}}/episode/1",
+          "host": [
+            "{{base_url_rickandmorty}}"
+          ],
+          "path": [
+            "episode",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET All Locations",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "pm.test(\"Response has results array\", function () {",
+              "    var jsonData = pm.response.json();",
+              "    pm.expect(jsonData).to.have.property(\"results\");",
+              "});",
+              "pm.test(\"First location is Earth\", function () {",
+              "    var jsonData = pm.response.json();",
+              "    pm.expect(jsonData.results[0].name).to.include(\"Earth\");",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url_rickandmorty}}/location",
+          "host": [
+            "{{base_url_rickandmorty}}"
+          ],
+          "path": [
+            "location"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET Superhero Biography (Thor) with TOKEN XD",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status code is 200', function () {",
+              "    pm.response.to.have.status(200);",
+              "})",
+              "",
+              "pm.test('Response time is less than 3000ms', function () {",
+              "    pm.expect(pm.response.responseTime).to.be.below(3000);",
+              "})",
+              "",
+              "pm.test('Response is JSON', function () {",
+              "    pm.response.to.be.json;",
+              "})",
+              "",
+              "pm.test('Biography has full-name field', function () {",
+              "    var jsonData = pm.response.json();",
+              "    pm.expect(jsonData).to.have.property('full-name');",
+              "})",
+              "",
+              "pm.test('Biography has publisher field', function () {",
+              "    var jsonData = pm.response.json();",
+              "    pm.expect(jsonData).to.have.property('publisher');",
+              "})",
+              "",
+              "pm.test('Biography has place-of-birth field', function () {",
+              "    var jsonData = pm.response.json();",
+              "    pm.expect(jsonData).to.have.property('place-of-birth');",
+              "})",
+              "",
+              "pm.test('Name is Thor Odinson', function () {",
+              "    var jsonData = pm.response.json();",
+              "    pm.expect(jsonData['full-name']).to.equal('Thor Odinson');",
+              "",
+              "})",
+              "",
+              "pm.test(\"Token exist\", function () {",
+              "    const token = pm.collectionVariables.get(\"token\");",
+              "    pm.expect(token).to.exist;",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url_superheroes}}/{{token}}/659/biography",
+          "host": [
+            "{{base_url_superheroes}}"
+          ],
+          "path": [
+            "{{token}}",
+            "659",
+            "biography"
+          ]
+        },
+        "description": "Obtiene solo la biografía del superhéroe con ID 659 (Thor). Endpoint: /api/{token}/{id}/biography"
+      },
+      "response": []
+    },
+    {
+      "name": "POST Login",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "const body = pm.response.json();\r",
+              "\r",
+              "pm.collectionVariables.set(\"tokenjwt\", body.token);\r",
+              "pm.collectionVariables.set(\"reftokenjwt\", body.refreshToken);\r",
+              "\r",
+              "pm.test(\"Status 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Token existe\", function () {\r",
+              "    pm.expect(body).to.have.property(\"token\");\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Usuario correcto\", function () {\r",
+              "    pm.expect(body.username).to.eql(\"emilys\");\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"username\": \"emilys\",\r\n  \"password\": \"emilyspass\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://dummyjson.com/auth/login",
+          "protocol": "https",
+          "host": [
+            "dummyjson",
+            "com"
+          ],
+          "path": [
+            "auth",
+            "login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET Profile (with token)",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{tokenjwt}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://dummyjson.com/auth/me",
+          "protocol": "https",
+          "host": [
+            "dummyjson",
+            "com"
+          ],
+          "path": [
+            "auth",
+            "me"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET Profile (no token)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status 401\", function () {\r",
+              "    pm.response.to.have.status(401);\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Tiene mensaje de error\", function () {\r",
+              "    const body = pm.response.json();\r",
+              "    pm.expect(body).to.have.property(\"message\");\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://dummyjson.com/auth/me",
+          "protocol": "https",
+          "host": [
+            "dummyjson",
+            "com"
+          ],
+          "path": [
+            "auth",
+            "me"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "POST Refresh",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "const body = pm.response.json();\r",
+              "\r",
+              "pm.collectionVariables.set(\"tokenjwt\", body.token);\r",
+              "\r",
+              "pm.test(\"Status 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Token existe\", function () {\r",
+              "    pm.expect(body).to.have.property(\"token\");\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Refresh token existe\", function () {\r",
+              "    pm.expect(body).to.have.property(\"refreshToken\");\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{reftokenjwt}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"refreshToken\": \"{{reftokenjwt}}\",\r\n  \"expiresInMins\": 30\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://dummyjson.com/auth/refresh",
+          "protocol": "https",
+          "host": [
+            "dummyjson",
+            "com"
+          ],
+          "path": [
+            "auth",
+            "refresh"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url_rickandmorty",
+      "value": "https://rickandmortyapi.com/api"
+    },
+    {
+      "key": "filterUser",
+      "value": "1"
+    },
+    {
+      "key": "token",
+      "value": "8881114d419834b684b416716ae630cf"
+    },
+    {
+      "key": "base_url_superheroes",
+      "value": "https://superheroapi.com/api"
+    },
+    {
+      "key": "tokenjwt",
+      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJlbWlseXMiLCJlbWFpbCI6ImVtaWx5LmpvaG5zb25AeC5kdW1teWpzb24uY29tIiwiZmlyc3ROYW1lIjoiRW1pbHkiLCJsYXN0TmFtZSI6IkpvaG5zb24iLCJnZW5kZXIiOiJmZW1hbGUiLCJpbWFnZSI6Imh0dHBzOi8vZHVtbXlqc29uLmNvbS9pY29uL2VtaWx5cy8xMjgiLCJpYXQiOjE3NzcwODkyNzYsImV4cCI6MTc3NzA5Mjg3Nn0.Wkgy7R_XZ71Ji6sjSEK9c2sr0pzng1ZwewuB7kexJiY"
+    },
+    {
+      "key": "reftokenjwt",
+      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJlbWlseXMiLCJlbWFpbCI6ImVtaWx5LmpvaG5zb25AeC5kdW1teWpzb24uY29tIiwiZmlyc3ROYW1lIjoiRW1pbHkiLCJsYXN0TmFtZSI6IkpvaG5zb24iLCJnZW5kZXIiOiJmZW1hbGUiLCJpbWFnZSI6Imh0dHBzOi8vZHVtbXlqc29uLmNvbS9pY29uL2VtaWx5cy8xMjgiLCJpYXQiOjE3NzcwODkyNzYsImV4cCI6MTc3OTY4MTI3Nn0.uucdyjs474Dfy-xMkv5IGWOFn4hywCE79K3xdxlfVAw"
+    }
+  ]
+}
