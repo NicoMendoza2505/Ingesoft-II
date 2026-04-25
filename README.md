@@ -129,6 +129,71 @@ A diferencia de JSONPlaceholder:
 
 ---
 
-## Conclusión
+# Evidencias y Análisis - GraphQL
 
-Este proyecto permitió comprender mejor cómo funcionan las APIs reales, el uso de autenticación con tokens y la validación de respuestas mediante testing automatizado en Postman.
+## Capturas de pantalla
+
+### Query - All Countries
+<img width="961" height="757" alt="image" src="https://github.com/user-attachments/assets/13f0247a-57c9-458d-baf4-547c0b5e2fd4" />
+
+### Query - All Continents
+<img width="961" height="757" alt="image" src="https://github.com/user-attachments/assets/b710bec6-7484-4e68-9a21-349997490a9f" />
+
+### Query - Continent con países (Nested)
+<img width="950" height="781" alt="image" src="https://github.com/user-attachments/assets/1b8fd3bf-4a23-47a1-84b2-b092fea3786f" />
+
+
+### Query - Country by Code
+<img width="980" height="749" alt="image" src="https://github.com/user-attachments/assets/a40886c7-a3fc-40d8-ac4a-a224ff68f670" />
+
+### Query - Countries by Continent
+<img width="968" height="663" alt="image" src="https://github.com/user-attachments/assets/77163993-d9de-4080-8833-d167032824c8" />
+
+
+---
+
+## ¿Qué hace cada Query?
+
+- **Query - All Countries** → Obtiene todos los países con información básica (nombre, código, capital, moneda, teléfono).
+
+- **Query - All Continents** → Obtiene todos los continentes con su código y nombre.
+
+- **Query - Continent con países (Nested)** → Obtiene un continente específico junto con sus países y los idiomas de cada país.
+
+- **Query - Country by Code** → Obtiene un país específico usando su código (en nuestro caso use CO = Colombia).
+
+- **Query - Countries by Continent** → Filtra y obtiene países que pertenecen a un continente específico (en este ejemplo use a europa).
+
+---
+
+## Respuestas
+
+### ¿Qué diferencia encontraste vs REST?
+
+La principal diferencia es que en GraphQL existe un solo endpoint donde se pueden hacer consultas personalizadas, mientras que en REST hay múltiples endpoints.
+
+En GraphQL el cliente decide qué datos quiere recibir, evitando traer información innecesaria. En cambio, en REST el servidor define la respuesta.
+
+Además, GraphQL permite hacer consultas anidadas en una sola petición, mientras que en REST normalmente se requieren varias solicitudes para obtener datos relacionados.
+
+---
+
+### ¿Cuántos requests REST necesitarías para reemplazar tu query más compleja?
+
+Para la query más compleja (continente con países e idiomas):
+
+- En GraphQL: solo 1 request  
+- En REST: aproximadamente entre 3 y 10 requests  
+
+Esto se debe a que en REST habría que:
+1. Obtener el continente  
+2. Obtener sus países  
+3. Obtener los idiomas de cada país  
+
+---
+
+### ¿En qué proyecto real usarías GraphQL?
+
+Usaría GraphQL en cualquier sistema donde el frontend necesite obtener diferentes tipos de datos desde un mismo lugar, sin hacer múltiples requests.
+
+Por ejemplo, en aplicaciones web o móviles donde se manejan muchos datos relacionados, GraphQL permite consultar solo la información necesaria en una sola petición, haciendo el sistema más eficiente y rápido.
