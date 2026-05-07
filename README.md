@@ -2,7 +2,7 @@
 
 ## Objetivo
 
-El objetivo de esta práctica fue configurar una conexión SSH entre Windows y una máquina virtual Linux, ejecutar un servidor Node.js y realizar pruebas a una API REST utilizando PowerShell.
+El objetivo de esta práctica fue configurar una conexión SSH entre Windows y una máquina virtual Linux, ejecutar un servidor Node.js y realizar pruebas a una API REST utilizando PowerShell (por que con los comandos de linux es un puto asco).
 
 ---
 
@@ -214,4 +214,4 @@ Invoke-RestMethod -Method DELETE -Uri http://localhost:3000/tasks/$($tarea.id) -
 
 Durante esta práctica se logró configurar correctamente el servicio SSH en Linux y establecer una conexión remota desde Windows utilizando PowerShell. Además, se ejecutó un servidor Node.js y se realizaron pruebas completas a una API REST, incluyendo operaciones de registro, autenticación, creación, actualización y eliminación de tareas.
 
-La práctica permitió comprender el funcionamiento de SSH, la administración remota de servidores Linux y el consumo de APIs REST utilizando PowerShell.
+La práctica permitió comprender el funcionamiento de SSH, la administración remota de servidores Linux y el consumo de APIs REST utilizando PowerShell en Sistemas Operativos como linux para facilitar un mejor manejo de comandos :))).
