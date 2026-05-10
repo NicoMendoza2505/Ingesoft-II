@@ -106,7 +106,7 @@ Error crítico en el sistema
 
 ## Captura
 
-<img width="492" height="172" alt="3patts" src="https://github.com/user-attachments/assets/982bb503-6ce5-4c21-8bc5-c53274052d31" />
+<img width="631" height="287" alt="3patts" src="https://github.com/user-attachments/assets/0bca6ac4-0921-4769-a3a3-129a8175cc2e" />
 
 
 # Sistema de Pedidos de Pizzería - Patrones de Diseño (singandfact.java)
@@ -253,7 +253,7 @@ true
 
 ## Captura
 
-<img width="312" height="95" alt="singleton" src="https://github.com/user-attachments/assets/e8513a56-3c0f-47d5-9ae8-441c6de554f8" />
+<img width="606" height="205" alt="singleton" src="https://github.com/user-attachments/assets/e4027cb7-cf10-440a-ac03-0766daf4a310" />
 
 
 El valor `true` confirma que `config1` y `config2` son exactamente la misma instancia.
