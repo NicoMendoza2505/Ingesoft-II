@@ -1,4 +1,4 @@
-# Sistema de Notificaciones - Patrones de Diseño
+# Sistema de Notificaciones - Patrones de Diseño (3patterns.java)
 
 ## Descripción
 Este proyecto es una aplicación sencilla desarrollada en Java que simula un sistema de notificaciones.  
@@ -106,4 +106,5 @@ Error crítico en el sistema
 
 ## Captura
 
-![singleton](https://github.com/user-attachments/assets/31f83140-1fe8-4925-8b3c-7144b92d8d3a)
+![singleton]<img width="492" height="172" alt="3patts" src="https://github.com/user-attachments/assets/982bb503-6ce5-4c21-8bc5-c53274052d31" />
+
