@@ -108,3 +108,86 @@ Error crítico en el sistema
 
 <img width="492" height="172" alt="3patts" src="https://github.com/user-attachments/assets/982bb503-6ce5-4c21-8bc5-c53274052d31" />
 
+
+# Sistema de Pedidos de Pizzería - Patrones de Diseño (singandfact.java)
+
+## Descripción
+Este proyecto es una aplicación sencilla desarrollada en Java que simula un sistema de pedidos para una pizzería.  
+La aplicación permite crear diferentes tipos de pizzas y registrar los pedidos realizados por los clientes.
+
+El objetivo principal del proyecto es demostrar la implementación de patrones de diseño dentro de una aplicación simple, mejorando la organización y reutilización del código.
+
+La app puede:
+- Crear distintos tipos de pizzas.
+- Registrar pedidos realizados.
+- Llevar el conteo total de pedidos.
+- Administrar todo desde una única instancia del sistema.
+
+---
+
+# Patrones de Diseño Utilizados
+
+## 1. Singleton
+El patrón Singleton se implementa en la clase `OrderSystem`.
+
+Este patrón garantiza que solo exista una única instancia del sistema de pedidos durante toda la ejecución del programa.
+
+### Uso
+```java
+OrderSystem system = OrderSystem.getInstance();
+```
+
+En este caso, todo el control de pedidos se realiza desde un único objeto compartido.
+
+---
+
+## 2. Factory
+El patrón Factory se utiliza en la clase `PizzaFactory`.
+
+Este patrón permite crear distintos tipos de pizzas sin necesidad de instanciar manualmente cada clase usando `new`.
+
+### Clases relacionadas
+- `Pizza`
+- `Margherita`
+- `Pepperoni`
+- `Hawaiian`
+- `PizzaFactory`
+
+### Uso
+```java
+Pizza p1 = PizzaFactory.create("margherita");
+Pizza p2 = PizzaFactory.create("pepperoni");
+Pizza p3 = PizzaFactory.create("hawaiana");
+```
+
+La fábrica se encarga de decidir qué tipo de pizza crear dependiendo del parámetro recibido.
+
+---
+
+# Funcionamiento de la Aplicación
+
+La aplicación crea distintos tipos de pizzas usando la fábrica y luego registra cada pedido en el sistema principal.
+
+### Registro de pedidos
+```java
+system.registerOrder(p1);
+system.registerOrder(p2);
+system.registerOrder(p3);
+```
+
+Cada vez que se registra un pedido, el sistema aumenta automáticamente el contador total de órdenes.
+
+---
+
+# Salida en Consola
+
+```text
+Pedido #1: Margherita
+Pedido #2: Pepperoni
+Pedido #3: Hawaiana
+Total de pedidos: 3
+```
+## Captura
+
+<img width="627" height="172" alt="singandfact" src="https://github.com/user-attachments/assets/2d235df2-c91c-4ba3-bd2f-ae367c9eafca" />
+
