@@ -191,3 +191,70 @@ Total de pedidos: 3
 
 <img width="627" height="172" alt="singandfact" src="https://github.com/user-attachments/assets/2d235df2-c91c-4ba3-bd2f-ae367c9eafca" />
 
+
+# Configuración de Aplicación - Patrón Singleton (Singleton.java)
+
+## Descripción
+Este proyecto es una aplicación sencilla desarrollada en Java que simula un sistema de configuración para una aplicación.
+
+La idea principal es manejar configuraciones globales como el idioma y el tema visual de la aplicación desde un único objeto compartido.
+
+El objetivo del proyecto es demostrar el funcionamiento del patrón de diseño Singleton y cómo puede utilizarse para centralizar configuraciones dentro de un sistema.
+
+La aplicación permite:
+- Cambiar el idioma de la aplicación.
+- Cambiar el tema visual.
+- Compartir la misma configuración en todo el programa.
+- Evitar crear múltiples instancias de configuración.
+
+---
+
+# Patrón de Diseño Utilizado
+
+## Singleton
+El patrón Singleton se implementa en la clase `AppConfig`.
+
+Este patrón garantiza que solo exista una única instancia de configuración durante toda la ejecución del programa.
+
+### Uso
+```java
+AppConfig config1 = AppConfig.getInstance();
+AppConfig config2 = AppConfig.getInstance();
+```
+
+Aunque se creen las variables `config1` y `config2`, ambas hacen referencia al mismo objeto.
+
+---
+
+# Funcionamiento de la Aplicación
+
+La aplicación inicia con valores por defecto:
+- Idioma: `es`
+- Tema: `dark`
+
+Luego, desde diferentes variables, se modifican las configuraciones:
+
+```java
+config1.setLanguage("en");
+config2.setTheme("light");
+```
+
+Como ambas variables apuntan al mismo objeto Singleton, los cambios realizados se reflejan en toda la aplicación.
+
+---
+
+# Salida en Consola
+
+```text
+Idioma: en
+Tema: light
+true
+```
+
+## Captura
+
+<img width="312" height="95" alt="singleton" src="https://github.com/user-attachments/assets/e8513a56-3c0f-47d5-9ae8-441c6de554f8" />
+
+
+El valor `true` confirma que `config1` y `config2` son exactamente la misma instancia.
+
