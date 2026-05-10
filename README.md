@@ -106,5 +106,5 @@ Error crítico en el sistema
 
 ## Captura
 
-![singleton]<img width="492" height="172" alt="3patts" src="https://github.com/user-attachments/assets/982bb503-6ce5-4c21-8bc5-c53274052d31" />
+<img width="492" height="172" alt="3patts" src="https://github.com/user-attachments/assets/982bb503-6ce5-4c21-8bc5-c53274052d31" />
 
