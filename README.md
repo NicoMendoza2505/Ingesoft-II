@@ -92,8 +92,6 @@ La fábrica se encarga de decidir qué tipo de notificación crear automáticame
 
 # Salida en Consola
 
-
-
 ```text
 Notificación: Sistema iniciado
 true
@@ -105,4 +103,7 @@ Servidor caído
 URGENTE
 Error crítico en el sistema
 ```
-<img width="312" height="95" alt="singleton" src="https://github.com/user-attachments/assets/31f83140-1fe8-4925-8b3c-7144b92d8d3a" />
+
+## Captura
+
+![singleton](https://github.com/user-attachments/assets/31f83140-1fe8-4925-8b3c-7144b92d8d3a)
