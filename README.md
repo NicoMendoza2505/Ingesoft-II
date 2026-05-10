@@ -102,10 +102,7 @@ Ana recibió: Nueva actualización disponible
 IMPORTANTE
 URGENTE
 Servidor caído
-
-
-<img width="312" height="95" alt="singleton" src="https://github.com/user-attachments/assets/31f83140-1fe8-4925-8b3c-7144b92d8d3a" />
-
 URGENTE
 Error crítico en el sistema
 ```
+<img width="312" height="95" alt="singleton" src="https://github.com/user-attachments/assets/31f83140-1fe8-4925-8b3c-7144b92d8d3a" />
