@@ -39,7 +39,7 @@ Se usan dos instancias de Axios:
 
 ---
 
-# 🔐 LOGIN
+# LOGIN
 
 El login se hace enviando:
 
